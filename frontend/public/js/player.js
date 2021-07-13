@@ -121,9 +121,9 @@ P.player = (function () {
       }
     }
     if (!isFullScreen) {
-      document.body.style.width = resolutionX + 'px';
-      document.body.style.height =
-        document.body.style.marginLeft =
+      document.body.style.width = '';
+      document.body.style.height = ''
+        document.body.style.marginLeft = '';
         document.body.style.marginTop = '';
     }
     updateFullScreen();
