@@ -151,7 +151,9 @@
         } else {
             for (let index = 0; index < document.getElementsByClassName("area").length; index++) {
                 const element = document.getElementsByClassName("area")[index];
-                element.style.width = "60%"
+				if(!document.fullscreen){
+                  element.style.width = "60%"
+				}
             }
             document.querySelector(".embed").style.float = "right"
             document.querySelector("#qrdiv").style.float = "right"
@@ -165,7 +167,7 @@
 
         if (id) {
             playerArea.style.display = "block"
-            projectArea.style.display = "block"
+            projectArea.style.display = ""
             playerArea.style.marginBottom = "0px"
             title.style.marginBottom = "0px"
             title.style.borderRadius = "0px 0px 25px 25px";
@@ -184,7 +186,7 @@
 
 
         if (id != "") {
-            document.getElementById("qrdiv").style.display = "block";
+            document.getElementById("qrdiv").style.display = "";
         } else {
             socket.emit("logRequest", { "id": "none", "version": "-1" })
         }

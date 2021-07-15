@@ -123,8 +123,14 @@ P.player = (function () {
     if (!isFullScreen) {
       document.body.style.width = '';
       document.body.style.height = ''
-        document.body.style.marginLeft = '';
-        document.body.style.marginTop = '';
+      document.body.style.marginLeft = '';
+      document.body.style.marginTop = '';
+	  
+	  var playerArea = document.getElementById("player-area");
+	  var playerContainer = document.getElementById("playercontainer");
+	  playerArea.style.width =  "";
+	  playerArea.style.height =  "";
+	  playerContainer.style.width =  "";
     }
     updateFullScreen();
     if (!stage.isRunning) {
@@ -148,10 +154,15 @@ P.player = (function () {
       var h = window.innerHeight - padding - controls.offsetHeight;
       w = Math.min(w, h * resolutionX / resolutionY);
       h = w * resolutionY / resolutionX + controls.offsetHeight;
-      document.body.style.width = w + 'px';
+	  document.body.style.width = w + 'px';
       document.body.style.height = h + 'px';
       document.body.style.marginLeft = (window.innerWidth - w) / 2 + 'px';
       document.body.style.marginTop = (window.innerHeight - h + padding) / 2 + 'px';
+	  var playerArea = document.getElementById("player-area");
+	  var playerContainer = document.getElementById("playercontainer");
+	  playerArea.style.width =  document.body.style.width;
+	  playerArea.style.height =  document.body.style.height;
+	  playerContainer.style.width =  document.body.style.width;
       stage.setZoom(w / 480, w * resolutionY / resolutionX / 360);
     } else {
       stage.setZoom(resolutionX ? resolutionX / 480 : 1, resolutionY ? resolutionY / 360 : 1);
