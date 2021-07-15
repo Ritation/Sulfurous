@@ -142,7 +142,9 @@
             console.log("TO SMALL")
             for (let index = 0; index < document.getElementsByClassName("area").length; index++) {
                 const element = document.getElementsByClassName("area")[index];
-                element.style.width = "480px"
+				if(!document.fullscreen){
+					element.style.width = "480px"
+				}
             }
             document.querySelector(".embed").style.float = "none"
             document.querySelector("#qrdiv").style.float = "none"
@@ -152,7 +154,7 @@
             for (let index = 0; index < document.getElementsByClassName("area").length; index++) {
                 const element = document.getElementsByClassName("area")[index];
 				if(!document.fullscreen){
-                  element.style.width = "60%"
+					element.style.width = "60%"
 				}
             }
             document.querySelector(".embed").style.float = "right"
