@@ -67,13 +67,18 @@ P.player = (function () {
   }
 
   function pauseClick(e) {
+	var AudioContext = P.audioContext;
     if (!stage) return;
     if (stage.isRunning) {
       stage.pause();
       pause.className = 'play';
+	  //Stop the audio from the game
+	  AudioContext.suspend();
     } else {
       stage.start();
       pause.className = 'pause';
+	  //Continue the audio from the game
+	  AudioContext.resume();
     }
     stage.focus();
     e.preventDefault();
