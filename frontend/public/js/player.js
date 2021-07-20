@@ -20,6 +20,7 @@ P.player = (function () {
   var turbo = document.querySelector('.turbo');
   var pause = document.querySelector('.pause');
   var stop = document.querySelector('.stop');
+  var mute = document.querySelector('.mute');
   var fullScreen = document.querySelector('.full-screen');
 
   var error = document.querySelector('.internal-error');
@@ -29,6 +30,8 @@ P.player = (function () {
   var legacyLink = document.querySelector('#legacy-link');
 
   var flagTouchTimeout;
+  
+  var AudioContext = P.audioContext;
 
   function setResolution(resX, resY) {
     resolutionX = resX;
@@ -85,7 +88,7 @@ P.player = (function () {
   }
 
   function stopClick(e) {
-
+	
     console.log('stop');
 
     if (!stage) return;
@@ -94,6 +97,17 @@ P.player = (function () {
     stage.stopAll();
     stage.focus();
     e.preventDefault();
+  }
+  
+  function muteClick(e) {
+	
+	if(volumeNode.gain.value!=0){
+	  volumeNode.gain.value=0;
+	  mute.innerHTML="Unmute";
+	}else{
+	  volumeNode.gain.value=0.3;	
+	  mute.innerHTML="Mute";
+	}
   }
 
   function fullScreenClick(e) {
@@ -184,11 +198,13 @@ P.player = (function () {
     flag.addEventListener('touchend', flagClick);
     pause.addEventListener('touchend', pauseClick);
     stop.addEventListener('touchend', stopClick);
+	mute.addEventListener('touchend', muteClick);
     fullScreen.addEventListener('touchend', fullScreenClick);
 
     flag.addEventListener('touchstart', preventDefault);
     pause.addEventListener('touchstart', preventDefault);
     stop.addEventListener('touchstart', preventDefault);
+	mute.addEventListener('touchstart', preventDefault);
     fullScreen.addEventListener('touchstart', preventDefault);
 
     document.addEventListener('touchmove', function (e) {
@@ -199,6 +215,7 @@ P.player = (function () {
   flag.addEventListener('click', flagClick);
   pause.addEventListener('click', pauseClick);
   stop.addEventListener('click', stopClick);
+  mute.addEventListener('click', muteClick);
   fullScreen.addEventListener('click', fullScreenClick);
 
 
