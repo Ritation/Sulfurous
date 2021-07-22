@@ -335,7 +335,7 @@ P.player = (function () {
   function isSB2(id) {
 
     return new Promise(function (resolve, reject) {
-      fetch('https://projects.scratch.mit.edu/internalapi/project/' + id + '/get')
+      fetch('https://projects.scratch.mit.edu/' + id + '')
         .then(function (response) {
           console.log(response.status)
           if (response.status == 200) {

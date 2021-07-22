@@ -23,7 +23,7 @@ const fetch = require('node-fetch');
 
 var getProjectJSON = async function (projectID) {
     //console.log(projectJSONBaseURL + projectID)
-    const req = await fetch("https://projects.scratch.mit.edu/internalapi/project/" + projectID + "/get");
+    const req = await fetch("https://projects.scratch.mit.edu/" + projectID + "");
     return req.json()
 }
 

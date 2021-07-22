@@ -410,7 +410,7 @@ var P = (function () {
 
   var IO = {};
 
-  IO.PROJECT_URL = 'https://projects.scratch.mit.edu/internalapi/project/';
+  IO.PROJECT_URL = 'https://projects.scratch.mit.edu/';
   IO.ASSET_URL = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/';
 
 
@@ -519,7 +519,7 @@ var P = (function () {
     projectID = id;
 
     request.defer = true;
-    var url = IO.PROJECT_URL + id + '/get/';
+    var url = IO.PROJECT_URL + id;
 
     console.log(url);
 
@@ -568,7 +568,7 @@ var P = (function () {
     var request = new CompositeRequest;
 
     request.defer = true;
-    request.add(P.IO.load('https://scratch.mit.edu/projects/' + id + '/').onLoad(function (data) {
+    request.add(P.IO.load('https://projects.scratch.mit.edu/' + id ).onLoad(function (data) {
       var m = /<title>\s*(.+?)(\s+on\s+Scratch)?\s*<\/title>/.exec(data);
       if (callback) request.onLoad(callback.bind(self));
       if (m) {
