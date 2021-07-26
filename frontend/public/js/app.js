@@ -173,7 +173,7 @@ function showWebGLError(e) {
 function isSB2(id) {
 
     return new Promise(function (resolve, reject) {
-        fetch('https://projects.scratch.mit.edu/' + id + '')
+        fetch('https://projects.scratch.mit.edu/internalapi/project/' + id + '/get')
             .then(function (response) {
                 console.log(response.status)
                 if (response.status == 200) {
