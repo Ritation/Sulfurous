@@ -115,6 +115,14 @@ var convertFromID = function (projectID) {
                                             fs.readFile('./sb2/' + projectID + ".sb2", function (err, data) {
                                                 if (err) throw err;
                                                 //   console.log(data.buffer);
+												
+												fs.unlink('./sb2/' + projectID + ".sb2", (err) => {	
+													if (err) {
+														console.error(err)
+														return
+													}
+												})
+												
                                                 resolve(data.buffer);
                                             });
                                             clearInterval(findsb2);

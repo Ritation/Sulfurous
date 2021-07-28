@@ -11,7 +11,7 @@
             echo "WORK: $sb3name"
             echo "$sb2name"
             python3 ./converter/sb3tosb2.py "-c" "$entry" "$sb2name"
-            mv "$entry" "./sb3/converted/$sb3name"
+            rm "$entry"
         fi
         echo "NO WORK"
     done
