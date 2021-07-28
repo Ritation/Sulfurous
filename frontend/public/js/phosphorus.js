@@ -4506,7 +4506,7 @@ var outputZip
 var sulfCookieVars = {};
 var sulfUsername;
 
-
+var volumeNode;
 
 
 window.onbeforeunload = WindowCloseHanlder;
@@ -6088,7 +6088,7 @@ P.runtime = (function () {
   if (audioContext) {
     var wavBuffers = P.IO.wavBuffers;
 
-    var volumeNode = audioContext.createGain();
+    volumeNode = audioContext.createGain();
     volumeNode.gain.value = VOLUME;
     volumeNode.connect(audioContext.destination);
 

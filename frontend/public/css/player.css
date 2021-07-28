@@ -46,6 +46,15 @@
 .controls .play {
   background-position: -64px 0;
 }
+.controls .mute {
+  background-image: none;
+  width: 64px;
+  float: left;
+  height: 16px;
+  top: 8px;
+  position: relative;
+}
+
 .controls .full-screen {
   float: left;
   background-position: -128px 0;

@@ -20,6 +20,7 @@ P.player = (function () {
   var turbo = document.querySelector('.turbo');
   var pause = document.querySelector('.pause');
   var stop = document.querySelector('.stop');
+  var mute = document.querySelector('.mute');
   var fullScreen = document.querySelector('.full-screen');
 
   var error = document.querySelector('.internal-error');
@@ -29,6 +30,8 @@ P.player = (function () {
   var legacyLink = document.querySelector('#legacy-link');
 
   var flagTouchTimeout;
+  
+  var AudioContext = P.audioContext;
 
   function setResolution(resX, resY) {
     resolutionX = resX;
@@ -67,20 +70,25 @@ P.player = (function () {
   }
 
   function pauseClick(e) {
+	var AudioContext = P.audioContext;
     if (!stage) return;
     if (stage.isRunning) {
       stage.pause();
       pause.className = 'play';
+	  //Stop the audio from the game
+	  AudioContext.suspend();
     } else {
       stage.start();
       pause.className = 'pause';
+	  //Continue the audio from the game
+	  AudioContext.resume();
     }
     stage.focus();
     e.preventDefault();
   }
 
   function stopClick(e) {
-
+	
     console.log('stop');
 
     if (!stage) return;
@@ -89,6 +97,17 @@ P.player = (function () {
     stage.stopAll();
     stage.focus();
     e.preventDefault();
+  }
+  
+  function muteClick(e) {
+	
+	if(volumeNode.gain.value!=0){
+	  volumeNode.gain.value=0;
+	  mute.innerHTML="Unmute";
+	}else{
+	  volumeNode.gain.value=0.3;	
+	  mute.innerHTML="Mute";
+	}
   }
 
   function fullScreenClick(e) {
@@ -121,10 +140,16 @@ P.player = (function () {
       }
     }
     if (!isFullScreen) {
-      document.body.style.width = resolutionX + 'px';
-      document.body.style.height =
-        document.body.style.marginLeft =
-        document.body.style.marginTop = '';
+      document.body.style.width = '';
+      document.body.style.height = ''
+      document.body.style.marginLeft = '';
+      document.body.style.marginTop = '';
+	  
+	  var playerArea = document.getElementById("player-area");
+	  var playerContainer = document.getElementById("playercontainer");
+	  playerArea.style.width =  "";
+	  playerArea.style.height =  "";
+	  playerContainer.style.width =  "";
     }
     updateFullScreen();
     if (!stage.isRunning) {
@@ -148,10 +173,15 @@ P.player = (function () {
       var h = window.innerHeight - padding - controls.offsetHeight;
       w = Math.min(w, h * resolutionX / resolutionY);
       h = w * resolutionY / resolutionX + controls.offsetHeight;
-      document.body.style.width = w + 'px';
+	  document.body.style.width = w + 'px';
       document.body.style.height = h + 'px';
       document.body.style.marginLeft = (window.innerWidth - w) / 2 + 'px';
       document.body.style.marginTop = (window.innerHeight - h + padding) / 2 + 'px';
+	  var playerArea = document.getElementById("player-area");
+	  var playerContainer = document.getElementById("playercontainer");
+	  playerArea.style.width =  document.body.style.width;
+	  playerArea.style.height =  document.body.style.height;
+	  playerContainer.style.width =  document.body.style.width;
       stage.setZoom(w / 480, w * resolutionY / resolutionX / 360);
     } else {
       stage.setZoom(resolutionX ? resolutionX / 480 : 1, resolutionY ? resolutionY / 360 : 1);
@@ -168,11 +198,13 @@ P.player = (function () {
     flag.addEventListener('touchend', flagClick);
     pause.addEventListener('touchend', pauseClick);
     stop.addEventListener('touchend', stopClick);
+	mute.addEventListener('touchend', muteClick);
     fullScreen.addEventListener('touchend', fullScreenClick);
 
     flag.addEventListener('touchstart', preventDefault);
     pause.addEventListener('touchstart', preventDefault);
     stop.addEventListener('touchstart', preventDefault);
+	mute.addEventListener('touchstart', preventDefault);
     fullScreen.addEventListener('touchstart', preventDefault);
 
     document.addEventListener('touchmove', function (e) {
@@ -183,6 +215,7 @@ P.player = (function () {
   flag.addEventListener('click', flagClick);
   pause.addEventListener('click', pauseClick);
   stop.addEventListener('click', stopClick);
+  mute.addEventListener('click', muteClick);
   fullScreen.addEventListener('click', fullScreenClick);
 
 

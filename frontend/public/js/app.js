@@ -11,7 +11,7 @@ var stage;
 var projectId = 17088932;
 var projectTitle = '';
 var turbo = false;
-var fullScreen = true;
+var isFullScreen = true;
 var aspectX = 4;
 var aspectY = 3;
 var resolutionX = 480;
@@ -52,7 +52,7 @@ let isPackage = false;
                     turbo = parts[1] !== 'false';
                     break;
                 case 'full-screen':
-                    fullScreen = parts[1] !== 'false';
+					isFullScreen = parts[1] !== 'false';
                     break;
                 case 'aspect-x':
                     aspectX = Number(parts[1]);
@@ -148,9 +148,9 @@ let isPackage = false;
 function layout() {
     if (!stage) return;
     var w = Math.min(window.innerWidth, window.innerHeight * aspectX / aspectY);
-    if (!fullScreen) w = resolutionX;
+    if (!isFullScreen) w = resolutionX;
     var h = w * aspectY / aspectX;
-    if (!fullScreen) h = resolutionY;
+    if (!isFullScreen) h = resolutionY;
     player.style.left = (window.innerWidth - w) / 2 + 'px';
     player.style.top = (window.innerHeight - h) / 2 + 'px';
     stage.setZoom(w / 480, h / 360);

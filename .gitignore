@@ -3,3 +3,5 @@ node_modules/
 *.sb3
 package-lock.json
 .vscode/
+backend/admintools/logs.json
+cloudSave/

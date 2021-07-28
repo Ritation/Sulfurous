@@ -106,33 +106,53 @@ a:active {
 }
 
 #title {
-   height: 4vh;
-position: relative;
+  height: 4vh;
+  position: relative;
 }
+
+.fs #title {
+  display:none;
+}	
 
 #playercontainer{
   float: left;
 }
 
+#player-area{
+  display:block;
+}
+
 #qrdiv{
   float: right;
-  
+  display:block;
   text-align: center;
 }
+
+.fs #qrdiv {
+  display:none;
+}	
+
 #qrcode{
   margin: 0 auto 0;
  width: 256px;
 }
 
-
 #project-area {
-  display: none;
+  display: block;
 
   margin-top: 1vh;
 }
 
+.fs #project-area {
+  display:none;
+}	
+
 #title-area {
   margin-bottom: 1vh;
+}
+
+.fs #title-area {
+  display:none;
 }
 
 #credits-area {
@@ -140,6 +160,10 @@ position: relative;
   border-radius: 20px;
   padding-bottom: 2px;
 }
+
+.fs #credits-area {
+  display:none;
+}	
 
 a,a:visited{
   color: #1f63ff;
@@ -155,9 +179,10 @@ a,a:visited{
   background-color: #ff9900;
 }
 
-
 .fs #player-area {
   overflow: visible;
+  position:absolute;
+  max-width:none;
 }
 
 

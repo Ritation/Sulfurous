@@ -76,9 +76,6 @@ var convertFromID = function (projectID) {
                     let outJSON = JSON.stringify(res).replace("â˜", "\u2601")
 
 
-                    fs.writeFileSync("./sb2/" + projectID + "project.json", outJSON)
-
-
 
                     newZip.file("project.json", outJSON);
 
@@ -100,8 +97,15 @@ var convertFromID = function (projectID) {
                                         // JSZip generates a readable stream with a "end" event,
                                         // but is piped here in a writable stream which emits a "finish" event.
                                         console.log("out.zip written.");
-                                    });
+										
+										var cp = require('child_process');
 
+										cp.exec('converter\\run.sh', function(err, stdout, stderr) {
+											//console.log(err);
+										});
+
+
+									});
                                 let findsb2 = setInterval(() => {
                                     var files = fs.readdirSync('./sb2/');
                                     // console.log(files)
@@ -111,6 +115,14 @@ var convertFromID = function (projectID) {
                                             fs.readFile('./sb2/' + projectID + ".sb2", function (err, data) {
                                                 if (err) throw err;
                                                 //   console.log(data.buffer);
+												
+												fs.unlink('./sb2/' + projectID + ".sb2", (err) => {	
+													if (err) {
+														console.error(err)
+														return
+													}
+												})
+												
                                                 resolve(data.buffer);
                                             });
                                             clearInterval(findsb2);
